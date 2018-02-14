@@ -72,7 +72,34 @@ public class Colosseum {
      *         Implement this function.
      */
     public static Pokemon buildPokemon() {
-        Pokemon tempPokemon = new Pokemon();
+        System.out.println("Hit points should be between 1 and " + MAX_HIT_POINTS);
+        int hp = 0;
+        while (hp <= 0 || hp > MAX_HIT_POINTS) {
+            hp = myScan.nextInt();
+            if (hp <= 0 || hp > MAX_HIT_POINTS){
+                System.out.println("Hit points should be between 1 and " + MAX_HIT_POINTS);
+            }
+        }
+        int at = 0;
+        System.out.println("Split fifty points between attack level and defense level.");
+        System.out.println("Enter attack points.");
+        while (at <= 0 || at > MAX_HIT_POINTS) {
+            at = myScan.nextInt();
+            if (at <= 0 || at > MAX_HIT_POINTS){
+                System.out.println("Attack points should be between 1 and " + MAX_HIT_POINTS);
+            }
+        }
+        int de = 0;
+        System.out.println("Enter a defense points in between 1 and " + (MAX_HIT_POINTS - at));
+        while (de <= 0 || de > (MAX_HIT_POINTS) - at) {
+            de = myScan.nextInt();
+            if (de <= 0 || de > MAX_HIT_POINTS - at){
+                System.out.println("Defense points should be between 1 and " + (MAX_HIT_POINTS - at));
+            }
+        }
+        System.out.println("Please enter a name for the pokemon");
+        String name = myScan.next();
+        Pokemon tempPokemon = new Pokemon(hp, at, de, name);
         return tempPokemon;
     }
 
@@ -101,7 +128,11 @@ public class Colosseum {
      * Write this function.
      */
     public static void determineWinner() {
-        System.out.println("Implement me!");
+        if (firstPokemon.hitPoints == 0){
+            System.out.println("Player 2 wins!");
+        } else {
+            System.out.println("Player 1 wins!");
+        }
     }
 
     /**
@@ -113,14 +144,12 @@ public class Colosseum {
         System.out.println("Player 1, build your Pokemon!");
         System.out.println("=================");
         firstPokemon = buildPokemon();
-        firstPokemon.name = "Chuchu";
 
         System.out.println("");
 
         System.out.println("Player 2, build your Pokemon!");
         System.out.println("==================");
         secondPokemon = buildPokemon();
-        secondPokemon.name = "Xyz";
     }
 
     /**
